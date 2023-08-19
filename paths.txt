@@ -4,5 +4,3 @@ register user.sql: 			@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\Regi
 trigger.sql: 				@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\trigger.sql"
 Borrow Book.sql: 			@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\Borrow_book.sql"
 insert books and avialability.sql: 	@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\Insert Books and Availability.sql"
-
-
