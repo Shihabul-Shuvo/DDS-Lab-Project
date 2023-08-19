@@ -1,46 +1,51 @@
 SET VERIFY OFF
 SET serveroutput on
 
-CREATE OR REPLACE PROCEDURE InsertLibraryMember AS
+CREATE OR REPLACE PROCEDURE InsertStationaryMember AS
 	v_phone_number   VARCHAR2(14);
     v_name           VARCHAR2(40);
     v_address        VARCHAR2(40);
 	v_membership     VARCHAR2(10);
     v_start_date_lib DATE;
     v_end_date_lib   DATE;
-	v_existing_membership VARCHAR2(10);
+	v_start_date members1.start_date_lib%type;
+    v_end_date   members1.start_date_lib%type;
 	v_member_count NUMBER;
+	v_member_count1 NUMBER;
 BEGIN
     -- Input values from the user
     v_phone_number := '&phone';
     v_name := '&name';
     v_address := '&address';
-	v_membership := 'Reader';
+	v_membership := 'Customer';
     v_start_date_lib := TRUNC(SYSDATE); -- Today's date
-    v_end_date_lib := TRUNC(ADD_MONTHS(SYSDATE, 1)); -- Same day of next month
-	v_existing_membership := 'none';
+	v_end_date_lib := TRUNC(ADD_MONTHS(SYSDATE, 1));
 	
-	SELECT COUNT(*)
-    INTO v_member_count
-    FROM Members
-    WHERE Phone_no = v_phone_number;
-	
-	IF v_member_count > 0 THEN
-	SELECT Membership_status
-    INTO v_existing_membership
-    FROM Members
-    WHERE Phone_No = v_phone_number;
-	END IF;
+	SELECT COUNT(*) INTO v_member_count FROM Members2@site WHERE Phone_no = v_phone_number;
+	SELECT COUNT(*) INTO v_member_count1 FROM Members3@site WHERE Phone_no = v_phone_number;
 	
 	-- If the member exists and is a 'reader', and the new membership is 'customer', update the membership status to 'both'
-	ELSIF v_existing_membership = 'Reader' THEN
-        UPDATE Members
-        SET Membership_status = 'Both'
+    IF v_member_count > 0 THEN
+		SELECT start_date_lib
+		INTO v_start_date 
+		from MEMBERS2@site
+		where Phone_No = v_phone_number;
+		
+		DELETE FROM Members2@site
         WHERE Phone_No = v_phone_number;
+		
+		INSERT INTO Members3@site VALUES (
+        v_phone_number,
+        v_name,
+        v_address,
+        'Both',
+        v_start_date,
+		v_end_date_lib
+    );
     COMMIT;
-	DBMS_OUTPUT.PUT_LINE('Updated status as both');
+	DBMS_OUTPUT.PUT_LINE('Updated status as Both.');
 	
-	ELSE
+	ELSIF v_member_count1 < 1 THEN
     -- Insert the values into the Members table
     INSERT INTO Members1 VALUES (
         v_phone_number,
@@ -48,7 +53,7 @@ BEGIN
         v_address,
         v_membership,
         v_start_date_lib,
-        v_end_date_lib
+		v_end_date_lib
     );
 	
     COMMIT;
@@ -73,6 +78,6 @@ END;
 
 DECLARE
 BEGIN
-    InsertLibraryMember;
+    InsertStationaryMember;
 END;
 /

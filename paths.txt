@@ -9,5 +9,6 @@ insert books and avialability.sql: 	@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\C
 
 stationary 
 fragments.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stationary site\fragments.sql"
+register User: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stationary site\Register User.sql"
 
 

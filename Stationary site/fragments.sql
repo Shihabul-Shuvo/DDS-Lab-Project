@@ -15,13 +15,13 @@ WHERE Membership_Status = 'Customer';
 
 -- Members3 (SLstatus = 'both')
 CREATE TABLE Members3 AS
-SELECT Phone_no, Name, Address, Membership_Status, Start_Date_lib
+SELECT *
 FROM Members
 WHERE Membership_Status = 'Both';
 
 -- Books2 (PJBook_ID, Price)
 CREATE TABLE Books2 AS
-SELECT Book_ID, Price
+SELECT Book_ID, Title, Price
 FROM Books;
 
 -- Book Copies2 (PJCopy_ID, Book_ID, Availibility_status_shop)
