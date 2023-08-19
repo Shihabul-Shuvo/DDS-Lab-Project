@@ -1,7 +1,6 @@
+drop database link site;
 
-drop database link station;
-
-create database link sta
+create database link site
  connect to system identified by "12345"
  using '(DESCRIPTION =
        (ADDRESS_LIST =

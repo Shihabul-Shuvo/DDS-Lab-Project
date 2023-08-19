@@ -1,5 +1,5 @@
 
-con.sql:  @"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\conn.sql"
+con.sql:  @"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Library site\conn.sql"
 
 create table.sql: @"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\create_table.sql"
 fragments.sql: @"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Library site\fragments.sql"

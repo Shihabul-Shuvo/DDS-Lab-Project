@@ -1,6 +1,16 @@
+conn.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\conn.sql"
+
 create table.sql: 			@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\create_table.sql"
 fragments.sql: 				@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\fragments.sql"
 register user.sql: 			@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\Register User.sql"
 trigger.sql: 				@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\trigger.sql"
 Borrow Book.sql: 			@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\Borrow_book.sql"
 insert books and avialability.sql: 	@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\Insert Books and Availability.sql"
+<<<<<<< HEAD
+=======
+
+stationary 
+fragments.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stationary site\fragments.sql"
+
+
+>>>>>>> f759a00329725f05678eaf48dd41069bd4adb85b
