@@ -34,21 +34,20 @@ BEGIN
 	
 	-- If the member exists and is a 'reader', and the new membership is 'customer', update the membership status to 'both'
     IF v_existing_membership = 'reader' THEN
-        UPDATE Members
+		UPDATE Members3
         SET Membership_status = 'both'
         WHERE Phone_No = v_phone_number;
     COMMIT;
-	DBMS_OUTPUT.PUT_LINE('Updated status as Both.');
+	DBMS_OUTPUT.PUT_LINE('Updated status as Both reader and customer.');
 	
 	ELSE
     -- Insert the values into the Members table
-    INSERT INTO Members VALUES (
+	INSERT INTO Members2 VALUES (
         v_phone_number,
         v_name,
         v_address,
         v_membership,
-        v_start_date_lib,
-		v_end_date_lib
+        v_start_date_lib
     );
 	
     COMMIT;
