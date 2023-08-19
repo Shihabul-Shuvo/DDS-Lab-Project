@@ -33,13 +33,20 @@ BEGIN
 	END IF;
 	
 	-- If the member exists and is a 'reader', and the new membership is 'customer', update the membership status to 'both'
-   	
-	IF v_existing_membership = 'Customer' THEN
+    IF v_membership = 'customer' THEN
         UPDATE Members
-        SET Membership_status = 'Both'
+        SET Membership_status = 'both'
+        WHERE Phone_No = v_phone_number;
+			
+    COMMIT;
+	DBMS_OUTPUT.PUT_LINE('Updated status as both');
+	
+	ELSIF v_existing_membership = 'customer' AND v_membership = 'reader' THEN
+        UPDATE Members
+        SET Membership_status = 'both'
         WHERE Phone_No = v_phone_number;
     COMMIT;
-	DBMS_OUTPUT.PUT_LINE('Updated status as both.');
+	DBMS_OUTPUT.PUT_LINE('Already a customer.');
 	
 	ELSE
     -- Insert the values into the Members table

@@ -1,84 +1,31 @@
-SET VERIFY OFF
-SET serveroutput on
+-- Droping table before creating
+Drop table members2;
+Drop table members3;
 
-CREATE OR REPLACE PACKAGE LibraryPackage AS
-    PROCEDURE InsertIntoBooks;
-	
-	FUNCTION GetAvailableCopies(
-        p_BookName VARCHAR2
-    ) RETURN NUMBER;
-	
-END LibraryPackage;
-/
+set serveroutput on
+set verify off
 
---Package Body
-CREATE OR REPLACE PACKAGE BODY LibraryPackage AS
-	--insert into books
-    PROCEDURE InsertIntoBooks AS
-		v_Title   books.title%type;
-		v_Author  books.author%type;
-		v_Price   books.price%type;
-		v_book_count NUMBER;
-	BEGIN 
-		-- Get user input
-		v_Title := '&Enter_Title';
-		v_Author := '&Enter_Author';
-		v_Price := &Enter_Price;
-		
-		SELECT COUNT(*) AS Total_Books 
-		INTO v_book_count FROM Books;
-		v_book_count := v_book_count+1;
-		
-        INSERT INTO Books VALUES(v_book_count, v_Title, v_Author, v_Price);
-        COMMIT;
-        DBMS_OUTPUT.PUT_LINE('Book inserted successfully.');
-    END InsertIntoBooks;
-	
-	
-	--Function Check available copies
-	FUNCTION GetAvailableCopies(
-        p_BookName VARCHAR2
-    ) RETURN NUMBER IS
-        v_BookID     NUMBER;
-        v_Copies     NUMBER;
-    BEGIN
-        SELECT Book_ID
-        INTO v_BookID
-        FROM Books
-        WHERE Title = p_BookName;
+-- Create new tables
 
-        SELECT COUNT(*)
-        INTO v_Copies
-        FROM Book_Copies
-        WHERE Book_ID = v_BookID AND Availability_Status_Library > 0;
+CREATE TABLE Members2 AS
+SELECT *
+FROM Members
+WHERE Membership_Status = 'Customer';
 
-        RETURN v_Copies;
-    EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE('Book not found.');
-            RETURN NULL;
-    END GetAvailableCopies;
-	
-END LibraryPackage;
-/
+CREATE TABLE Members3 AS
+SELECT *
+FROM Members
+WHERE Membership_Status = 'Both';
+
+-- Display the counts of the new tables
 DECLARE
-	v_BookName     VARCHAR2(50);
-    v_AvailableCopies NUMBER;
+    v_count2 NUMBER;
+    v_count3 NUMBER;
 BEGIN
-    -- Call the InsertIntoBooks procedure with user input
-	--LibraryPackage.InsertIntoBooks;
-	
-	-- Get user input
-    v_BookName := '&Enter_BookName';
-
-    -- Call the GetAvailableCopies function with user input
-    v_AvailableCopies := LibraryPackage.GetAvailableCopies(v_BookName);
-
-    -- Display the result
-    IF v_AvailableCopies IS NOT NULL THEN
-        DBMS_OUTPUT.PUT_LINE('Available Copies of ' || v_BookName || ': ' || v_AvailableCopies);
-    END IF;
+    SELECT COUNT(*) INTO v_count2 FROM Members2;
+    SELECT COUNT(*) INTO v_count3 FROM Members3;
+    
+    DBMS_OUTPUT.PUT_LINE('Members2 count: ' || v_count2);
+    DBMS_OUTPUT.PUT_LINE('Members3 count: ' || v_count3);
 END;
 /
-
-
