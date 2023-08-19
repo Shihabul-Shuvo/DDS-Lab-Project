@@ -15,9 +15,9 @@ BEGIN
     v_phone_number := '&phone';
     v_name := '&name';
     v_address := '&address';
-	v_membership := 'customer';
+	v_membership := '&reader_or_customer';
     v_start_date_lib := TRUNC(SYSDATE); -- Today's date
-	v_start_date_lib := NULL;
+    v_end_date_lib := TRUNC(ADD_MONTHS(SYSDATE, 1)); -- Same day of next month
 	v_existing_membership := 'none';
 	
 	SELECT COUNT(*)
@@ -33,12 +33,19 @@ BEGIN
 	END IF;
 	
 	-- If the member exists and is a 'reader', and the new membership is 'customer', update the membership status to 'both'
-    IF v_existing_membership = 'reader' THEN
+    IF v_existing_membership = 'reader' AND v_membership = 'customer' THEN
         UPDATE Members
         SET Membership_status = 'both'
         WHERE Phone_No = v_phone_number;
     COMMIT;
-	DBMS_OUTPUT.PUT_LINE('Updated status as Both.');
+	DBMS_OUTPUT.PUT_LINE('Already a reader.');
+	
+	ELSIF v_existing_membership = 'customer' AND v_membership = 'reader' THEN
+        UPDATE Members
+        SET Membership_status = 'both'
+        WHERE Phone_No = v_phone_number;
+    COMMIT;
+	DBMS_OUTPUT.PUT_LINE('Already a customer.');
 	
 	ELSE
     -- Insert the values into the Members table
@@ -48,7 +55,7 @@ BEGIN
         v_address,
         v_membership,
         v_start_date_lib,
-		v_end_date_lib
+        v_end_date_lib
     );
 	
     COMMIT;

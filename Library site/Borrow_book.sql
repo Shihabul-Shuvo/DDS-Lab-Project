@@ -75,7 +75,7 @@ BEGIN
     v_PhoneNo := '&Borrower_PhoneNo';
     v_BorrowBookName := '&Book_to_Borrow';
     v_LoanDate := TO_DATE('&Enter_LoanDate', 'YYYY-MM-DD');
-    v_ReturnDate := TO_DATE('&Enter_ReturnDate(YYYY-MM-DD)', 'YYYY-MM-DD');
+    v_ReturnDate := TO_DATE('&Enter_ReturnDate', 'YYYY-MM-DD');
 
     -- Call the BorrowBook function with user input
     v_Borrowed := BorrowFromLibraryPackage.BorrowBook(v_PhoneNo, v_BorrowBookName, v_LoanDate, v_ReturnDate);
