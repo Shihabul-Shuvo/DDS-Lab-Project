@@ -5,6 +5,8 @@ CREATE OR REPLACE PROCEDURE InsertStationaryMember AS
 	v_phone_number   VARCHAR2(14);
     v_name           VARCHAR2(40);
     v_address        VARCHAR2(40);
+	f_name           VARCHAR2(40);
+    f_address        VARCHAR2(40);
 	v_membership     VARCHAR2(10);
     v_start_date_lib DATE;
     v_end_date_lib   DATE;
@@ -26,8 +28,8 @@ BEGIN
 	
 	-- If the member exists and is a 'reader', and the new membership is 'customer', update the membership status to 'both'
     IF v_member_count > 0 THEN
-		SELECT start_date_lib, end_date_lib 
-		INTO v_start_date, v_end_date 
+		SELECT name, address, start_date_lib, end_date_lib 
+		INTO f_name, f_address, v_start_date, v_end_date 
 		from MEMBERS1@site
 		where Phone_No = v_phone_number;
 		
@@ -36,9 +38,9 @@ BEGIN
 		
 		INSERT INTO Members3 VALUES (
         v_phone_number,
-        v_name,
-        v_address,
-        v_membership,
+        f_name,
+        f_address,
+        'Both',
         v_start_date,
 		v_end_date
     );
