@@ -1,3 +1,11 @@
+-- Droping table before creating
+Drop table members1;
+Drop table members2;
+Drop table members3;
+Drop table books1;
+Drop table books2;
+Drop table Book_Copies1;
+Drop table Book_Copies2;
 -- Create new tables for fragments
 -- Members1 (SLstatus = 'reader')
 CREATE TABLE Members1 AS
