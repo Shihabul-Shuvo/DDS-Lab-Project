@@ -32,7 +32,7 @@ CREATE OR REPLACE PACKAGE BODY BorrowFromLibraryPackage AS
 		--Get Book_Id from Books table
 		SELECT Book_ID
         INTO v_borrow_BookID
-        FROM Books
+        FROM Books1
         WHERE Title = p_BorrowBookName;
 		
         INSERT INTO Borrowers (Borrow_ID, Phone_No, Book_ID, Loan_Date, Return_Date, Fine)
@@ -40,7 +40,7 @@ CREATE OR REPLACE PACKAGE BODY BorrowFromLibraryPackage AS
         COMMIT;
 
         -- Update the Availability_Status_Library for the borrowed book copy
-        UPDATE Book_Copies
+        UPDATE Book_Copies1
         SET Availability_Status_Library = (Availability_Status_Library-1)
         WHERE Book_ID = v_borrow_BookID AND Availability_Status_Library > 0;
 		commit;
