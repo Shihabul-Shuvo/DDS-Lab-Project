@@ -45,13 +45,14 @@ CREATE TABLE Borrowers (
 -- Create Purchases table
 CREATE TABLE Purchases (
   Purchase_ID NUMBER PRIMARY KEY,
-  Phone_No VARCHAR2(11) REFERENCES Members(Phone_No),
+  Phone_No VARCHAR2(11),
   Book_ID NUMBER REFERENCES Books(Book_ID),
-  Purchase_Date DATE,
-  Purchase_Item VARCHAR2(40),
-  Amount NUMBER,
-  Discount number
+  Purchase_Date DATE
 );
+
+DROP SEQUENCE Purchases_seq;
+CREATE SEQUENCE Purchases_seq START WITH 5 INCREMENT BY 1 NOCACHE NOCYCLE;
+
 --Insert values into Members table
 INSERT INTO Members VALUES ('01801234567', 'Md. Rahman', 'Dhaka', 'Reader', TO_DATE('2023-07-31', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'));
 INSERT INTO Members VALUES ('01787654321', 'Shahnaz Begum', 'Chittagong', 'Customer', TO_DATE('2023-07-30', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'));
@@ -67,11 +68,11 @@ INSERT INTO Books VALUES (4, 'Pride and Prejudice', 'Jane Austen', 8.75);
 INSERT INTO Books VALUES (5, 'To Kill a Kingdom', 'Alexandra Christo', 15.25);
 
 --Insert values into Book_Copies table
-INSERT INTO Book_Copies VALUES (1, 1, 5, 2, 1);
-INSERT INTO Book_Copies VALUES (2, 5, 3, 4, 0);
-INSERT INTO Book_Copies VALUES (3, 2, 7, 5, 1);
-INSERT INTO Book_Copies VALUES (4, 3, 2, 1, 1);
-INSERT INTO Book_Copies VALUES (5, 4, 4, 3, 0);
+INSERT INTO Book_Copies VALUES (1, 1, 5, 6, 5);
+INSERT INTO Book_Copies VALUES (2, 5, 3, 6, 5);
+INSERT INTO Book_Copies VALUES (3, 2, 7, 6, 5);
+INSERT INTO Book_Copies VALUES (4, 3, 2, 6, 5);
+INSERT INTO Book_Copies VALUES (5, 4, 4, 6, 5);
 
 -- Insert values into Borrowers table
 INSERT INTO Borrowers VALUES (1, '01987654321', 2, TO_DATE('2023-07-31', 'YYYY-MM-DD'), TO_DATE('2023-08-14', 'YYYY-MM-DD'), 0);
@@ -81,19 +82,18 @@ INSERT INTO Borrowers VALUES (4, '01654321098', 3, TO_DATE('2023-07-28', 'YYYY-M
 INSERT INTO Borrowers VALUES (5, '01787654321', 5, TO_DATE('2023-07-27', 'YYYY-MM-DD'), TO_DATE('2023-08-10', 'YYYY-MM-DD'), 0);
 
 -- Insert values into Purchases table
-INSERT INTO Purchases (Purchase_ID, Phone_No, Book_ID, Purchase_Date, Purchase_Item, Amount, Discount)
-VALUES (1, '01787654321', 1, TO_DATE('2023-07-31', 'YYYY-MM-DD'), 'To Kill a Mockingbird', 12.99, 0);
+INSERT INTO Purchases
+VALUES (1, '01787654321', 1, TO_DATE('2023-07-31', 'YYYY-MM-DD'));
 
-INSERT INTO Purchases (Purchase_ID, Phone_No, Book_ID, Purchase_Date, Purchase_Item, Amount, Discount)
-VALUES (2, '01987654321', 2, TO_DATE('2023-07-30', 'YYYY-MM-DD'), '1984', 9.99, 0);
+INSERT INTO Purchases
+VALUES (2, '01987654321', 2, TO_DATE('2023-07-30', 'YYYY-MM-DD'));
 
-INSERT INTO Purchases (Purchase_ID, Phone_No, Book_ID, Purchase_Date, Purchase_Item, Amount, Discount)
-VALUES (3, '01987654321', 3, TO_DATE('2023-07-29', 'YYYY-MM-DD'), 'The Great Gatsby', 10.49, 0);
+INSERT INTO Purchases
+VALUES (3, '01987654321', 3, TO_DATE('2023-07-29', 'YYYY-MM-DD'));
 
-INSERT INTO Purchases (Purchase_ID, Phone_No, Book_ID, Purchase_Date, Purchase_Item, Amount, Discount)
-VALUES (4, '01543210987', 4, TO_DATE('2023-07-28', 'YYYY-MM-DD'), 'Pride and Prejudice', 8.75, 0);
+INSERT INTO Purchases 
+VALUES (4, '01543210987', 4, TO_DATE('2023-07-28', 'YYYY-MM-DD'));
 
-INSERT INTO Purchases (Purchase_ID, Phone_No, Book_ID, Purchase_Date, Purchase_Item, Amount, Discount)
-VALUES (5, '01787654321', 5, TO_DATE('2023-07-27', 'YYYY-MM-DD'), 'To Kill a Kingdom', 15.25, 0);
+INSERT INTO Purchases VALUES (Purchases_seq.nextval, '01787654321', 5, TO_DATE('2023-07-27', 'YYYY-MM-DD'));
 
 commit;

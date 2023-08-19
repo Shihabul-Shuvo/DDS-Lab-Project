@@ -1,14 +1,25 @@
 conn.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\conn.sql"
 
-create table.sql: 			@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\create_table.sql"
+create table.sql: 			@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\create_table.sql"
 fragments.sql: 				@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\fragments.sql"
 register user.sql: 			@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\Register User.sql"
 trigger.sql: 				@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\trigger.sql"
 Borrow Book.sql: 			@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\Borrow_book.sql"
 insert books and avialability.sql: 	@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\CkeckPoint\Insert Books and Availability.sql"
 
-stationary 
+Stationary site: 
 fragments.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stationary site\fragments.sql"
+
+Register a user to stationary operation:
 register User: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stationary site\Register User.sql"
+
+Check Book Availability:
+Check Book Availability.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stationary site\Check Book Availability.sql"
+
+Buy a book operation:
+Buy Books: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stationary site\buy book.sql"
+
+update book availability status operation:
+update availability status.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stationary site\update availability status.sql"
 
 

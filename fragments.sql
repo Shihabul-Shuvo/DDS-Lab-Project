@@ -40,7 +40,7 @@ WHERE Membership_Status = 'Both';
 
 -- Books2 (PJBook_ID, Price)
 CREATE TABLE Books2 AS
-SELECT Book_ID, Price
+SELECT Book_ID, Title, Price
 FROM Books;
 
 -- Book Copies2 (PJCopy_ID, Book_ID, Availibility_status_shop)

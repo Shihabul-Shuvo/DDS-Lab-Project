@@ -1,31 +1,10 @@
--- Droping table before creating
-Drop table members2;
-Drop table members3;
-
-set serveroutput on
-set verify off
-
--- Create new tables
-
-CREATE TABLE Members2 AS
-SELECT *
-FROM Members
-WHERE Membership_Status = 'Customer';
-
-CREATE TABLE Members3 AS
-SELECT *
-FROM Members
-WHERE Membership_Status = 'Both';
-
--- Display the counts of the new tables
 DECLARE
-    v_count2 NUMBER;
-    v_count3 NUMBER;
+    v_value NUMBER;
 BEGIN
-    SELECT COUNT(*) INTO v_count2 FROM Members2;
-    SELECT COUNT(*) INTO v_count3 FROM Members3;
-    
-    DBMS_OUTPUT.PUT_LINE('Members2 count: ' || v_count2);
-    DBMS_OUTPUT.PUT_LINE('Members3 count: ' || v_count3);
+    -- Attempt to divide by zero, which will cause an error
+    v_value := 10 / 0;
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);
 END;
 /
