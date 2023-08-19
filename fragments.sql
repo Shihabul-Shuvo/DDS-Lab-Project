@@ -29,4 +29,40 @@ BEGIN
     DBMS_OUTPUT.PUT_LINE('Members3 count: ' || v_count3);
 END;
 /
+
+
+-- Create the Books1 table
+CREATE TABLE Books1 (
+  PJBook_ID NUMBER PRIMARY KEY,
+  Title VARCHAR2(255),
+  Author VARCHAR2(255),
+  Publisher VARCHAR2(255)
+);
+
+-- Create the Books2 table
+CREATE TABLE Books2 (
+  PJBook_ID NUMBER PRIMARY KEY,
+  PriceBooks NUMBER
+);
+
+
+-- Create the Book_Copies1 table
+CREATE TABLE Book_Copies1 (
+  PJCopy_ID NUMBER PRIMARY KEY,
+  Book_ID NUMBER,
+  Books_at_library NUMBER,
+  Availibility_status_libraryBook_Copies VARCHAR2(50),
+  FOREIGN KEY (Book_ID) REFERENCES Books (PJBook_ID)
+);
+
+-- Create the Book_Copies2 table
+CREATE TABLE Book_Copies2 (
+  PJCopy_ID NUMBER PRIMARY KEY,
+  Book_ID NUMBER,
+  Availibility_status_shopBook_Copies VARCHAR2(50),
+  FOREIGN KEY (Book_ID) REFERENCES Books (PJBook_ID)
+);
+
+
+
 commit;
