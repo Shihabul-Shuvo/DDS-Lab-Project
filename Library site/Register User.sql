@@ -15,7 +15,7 @@ BEGIN
     v_phone_number := '&phone';
     v_name := '&name';
     v_address := '&address';
-	v_membership := '&reader_or_customer';
+	v_membership := 'reader';
     v_start_date_lib := TRUNC(SYSDATE); -- Today's date
     v_end_date_lib := TRUNC(ADD_MONTHS(SYSDATE, 1)); -- Same day of next month
 	v_existing_membership := 'none';
@@ -33,12 +33,13 @@ BEGIN
 	END IF;
 	
 	-- If the member exists and is a 'reader', and the new membership is 'customer', update the membership status to 'both'
-    IF v_existing_membership = 'reader' AND v_membership = 'customer' THEN
+    IF v_membership = 'customer' THEN
         UPDATE Members
         SET Membership_status = 'both'
         WHERE Phone_No = v_phone_number;
+			
     COMMIT;
-	DBMS_OUTPUT.PUT_LINE('Already a reader.');
+	DBMS_OUTPUT.PUT_LINE('Updated status as both');
 	
 	ELSIF v_existing_membership = 'customer' AND v_membership = 'reader' THEN
         UPDATE Members

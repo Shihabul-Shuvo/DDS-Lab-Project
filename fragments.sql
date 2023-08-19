@@ -11,23 +11,23 @@ Drop table Book_Copies2;
 CREATE TABLE Members1 AS
 SELECT *
 FROM Members
-WHERE Status = 'reader';
+WHERE Membership_Status = 'reader';
 
 -- Members2 (SLstatus = 'customer')
 CREATE TABLE Members2 AS
 SELECT Phone_no, Name, Address, Membership_Status, Start_Date_lib
 FROM Members
-WHERE Status = 'customer';
+WHERE Membership_Status = 'customer';
 
 -- Members3 (SLstatus = 'both')
 CREATE TABLE Members3 AS
 SELECT Phone_no, Name, Address, Membership_Status, Start_Date_lib
 FROM Members
-WHERE Status = 'both';
+WHERE Membership_Status = 'both';
 
--- Books1 (PJBook_ID, Title, Author, Publisher)
+-- Books1 (PJBook_ID, Title, Author)
 CREATE TABLE Books1 AS
-SELECT Book_ID, Title, Author, Publisher
+SELECT Book_ID, Title, Author
 FROM Books;
 
 -- Books2 (PJBook_ID, Price)
