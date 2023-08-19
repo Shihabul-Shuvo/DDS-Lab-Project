@@ -1,3 +1,4 @@
+--Drop tables
 Drop table Purchases;
 Drop table Borrowers;
 Drop table Book_Copies; 
