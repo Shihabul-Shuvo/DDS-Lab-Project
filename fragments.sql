@@ -1,4 +1,7 @@
 -- Create new tables
+DROP TABLE Members1;
+DROP TABLE Members2;
+DROP TABLE Members3;
 CREATE TABLE Members1 AS
 SELECT *
 FROM Members
@@ -7,7 +10,7 @@ WHERE Membership_Status = 'Reader';
 CREATE TABLE Members2 AS
 SELECT *
 FROM Members
-WHERE Membership_Status = 'Customer' OR Membership_Status = 'Both';
+WHERE Membership_Status = 'Customer';
 
 CREATE TABLE Members3 AS
 SELECT *
