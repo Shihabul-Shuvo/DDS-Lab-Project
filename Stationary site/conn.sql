@@ -1,12 +1,12 @@
 
-drop database link medical;
+drop database link lib;
 
-create database link medical
- connect to system identified by "123456"
+create database link lib
+ connect to system identified by "12345"
  using '(DESCRIPTION =
        (ADDRESS_LIST =
          (ADDRESS = (PROTOCOL = TCP)
-		 (HOST = 192.168.43.64)
+		 (HOST = 192.168.0.112)
 		 (PORT = 1521))
        )
        (CONNECT_DATA =
