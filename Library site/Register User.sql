@@ -1,7 +1,7 @@
 SET VERIFY OFF
 SET serveroutput on
 
-CREATE OR REPLACE PROCEDURE InsertStationaryMember AS
+CREATE OR REPLACE PROCEDURE InsertLibraryMember AS
 	v_phone_number   VARCHAR2(14);
     v_name           VARCHAR2(40);
     v_address        VARCHAR2(40);
@@ -19,15 +19,15 @@ BEGIN
     v_address := '&address';
 	v_membership := 'Customer';
     v_start_date_lib := TRUNC(SYSDATE); -- Today's date
-	v_end_date_lib := TRUNC(ADD_MONTHS(SYSDATE, 1));
+    v_end_date_lib := TRUNC(ADD_MONTHS(SYSDATE, 1)); -- Same day of next month
 	
 	SELECT COUNT(*) INTO v_member_count FROM Members2@site WHERE Phone_no = v_phone_number;
 	SELECT COUNT(*) INTO v_member_count1 FROM Members3@site WHERE Phone_no = v_phone_number;
 	
 	-- If the member exists and is a 'reader', and the new membership is 'customer', update the membership status to 'both'
     IF v_member_count > 0 THEN
-		SELECT start_date_lib
-		INTO v_start_date 
+		SELECT name, address, start_date_lib
+		INTO f_name, f_address, v_start_date 
 		from MEMBERS2@site
 		where Phone_No = v_phone_number;
 		
@@ -36,8 +36,8 @@ BEGIN
 		
 		INSERT INTO Members3@site VALUES (
         v_phone_number,
-        v_name,
-        v_address,
+        f_name,
+        f_address,
         'Both',
         v_start_date,
 		v_end_date_lib
@@ -78,6 +78,6 @@ END;
 
 DECLARE
 BEGIN
-    InsertStationaryMember;
+    InsertLibraryMember;
 END;
 /
