@@ -15,13 +15,13 @@ WHERE Status = 'reader';
 
 -- Members2 (SLstatus = 'customer')
 CREATE TABLE Members2 AS
-SELECT Phone, Name, Address, Status, Start_Date
+SELECT Phone_no, Name, Address, Membership_Status, Start_Date_lib
 FROM Members
 WHERE Status = 'customer';
 
 -- Members3 (SLstatus = 'both')
 CREATE TABLE Members3 AS
-SELECT Phone, Name, Address, Status, Start_Date
+SELECT Phone_no, Name, Address, Membership_Status, Start_Date_lib
 FROM Members
 WHERE Status = 'both';
 
