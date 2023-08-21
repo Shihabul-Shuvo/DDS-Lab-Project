@@ -55,33 +55,6 @@ BEGIN
 END;
 /
 
--- Trigger after inserting into Members3 table
-CREATE OR REPLACE TRIGGER after_insert_members3
-AFTER INSERT ON Members3@site
-FOR EACH ROW
-BEGIN
-    DBMS_OUTPUT.PUT_LINE('A new record was inserted into Members3 table.');
-END;
-/
-
--- Trigger after updating Members3 table
-CREATE OR REPLACE TRIGGER after_update_members3
-AFTER UPDATE ON Members3@site
-FOR EACH ROW
-BEGIN
-    DBMS_OUTPUT.PUT_LINE('A record was updated in Members3 table.');
-END;
-/
-
--- Trigger after deleting from Members3 table
-CREATE OR REPLACE TRIGGER after_delete_members3
-AFTER DELETE ON Members3@site
-FOR EACH ROW
-BEGIN
-    DBMS_OUTPUT.PUT_LINE('A record was deleted from Members3 table.');
-END;
-/
-
 -- Trigger after inserting into Books1 table
 CREATE OR REPLACE TRIGGER after_insert_books1
 AFTER INSERT ON Books1
