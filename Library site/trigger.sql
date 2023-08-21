@@ -28,33 +28,6 @@ BEGIN
 END;
 /
 
--- Trigger after inserting into Purchases table
-CREATE OR REPLACE TRIGGER after_insert_purchases
-AFTER INSERT ON Purchases
-FOR EACH ROW
-BEGIN
-    DBMS_OUTPUT.PUT_LINE('A new record was inserted into Purchases table.');
-END;
-/
-
--- Trigger after updating Purchases table
-CREATE OR REPLACE TRIGGER after_update_purchases
-AFTER UPDATE ON Purchases
-FOR EACH ROW
-BEGIN
-    DBMS_OUTPUT.PUT_LINE('A record was updated in Purchases table.');
-END;
-/
-
--- Trigger after deleting from Purchases table
-CREATE OR REPLACE TRIGGER after_delete_purchases
-AFTER DELETE ON Purchases
-FOR EACH ROW
-BEGIN
-    DBMS_OUTPUT.PUT_LINE('A record was deleted from Purchases table.');
-END;
-/
-
 -- Trigger after inserting into Members1 table
 CREATE OR REPLACE TRIGGER after_insert_members1
 AFTER INSERT ON Members1
@@ -84,7 +57,7 @@ END;
 
 -- Trigger after inserting into Members3 table
 CREATE OR REPLACE TRIGGER after_insert_members3
-AFTER INSERT ON Members3
+AFTER INSERT ON Members3@site
 FOR EACH ROW
 BEGIN
     DBMS_OUTPUT.PUT_LINE('A new record was inserted into Members3 table.');
@@ -93,7 +66,7 @@ END;
 
 -- Trigger after updating Members3 table
 CREATE OR REPLACE TRIGGER after_update_members3
-AFTER UPDATE ON Members3
+AFTER UPDATE ON Members3@site
 FOR EACH ROW
 BEGIN
     DBMS_OUTPUT.PUT_LINE('A record was updated in Members3 table.');
@@ -102,7 +75,7 @@ END;
 
 -- Trigger after deleting from Members3 table
 CREATE OR REPLACE TRIGGER after_delete_members3
-AFTER DELETE ON Members3
+AFTER DELETE ON Members3@site
 FOR EACH ROW
 BEGIN
     DBMS_OUTPUT.PUT_LINE('A record was deleted from Members3 table.');
