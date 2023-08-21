@@ -40,6 +40,7 @@ update availability status.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stati
 --------Library site-----------
 test.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\test.sql"
 
+trigger.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\trigger.sql"
 Register user.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\Register User.sql"
 
 Update fine: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\update fine.sql"
@@ -47,5 +48,6 @@ show borrowers info: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\sho
 show book availability: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\show book availability.sql"
 Borrow_book.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\Borrow_book.sql"
 check membership: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\check membership.sql"
+return book.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\return book.sql"
 
 

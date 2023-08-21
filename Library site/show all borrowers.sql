@@ -1,3 +1,4 @@
+set serveroutput on
 DECLARE
     -- Declare variables for cursor
     CURSOR c_borrower_info IS
@@ -20,12 +21,14 @@ DECLARE
     v_fine Borrowers.fine%TYPE;
 BEGIN
 	UpdateFine;
-    DBMS_OUTPUT.PUT_LINE(RPAD('Name', 16) || RPAD('Address', 20) || RPAD('Phone No', 12) || RPAD('Loan Date', 10) || RPAD('Return Date', 11) || ' Fine');
-    DBMS_OUTPUT.PUT_LINE('------------------------------------------------------------------------------');
-    
     -- Open the cursor
     OPEN c_borrower_info;
-
+	FETCH c_borrower_info INTO v_phone_no, v_name, v_address, v_loan_date, v_return_date, v_fine;
+	if c_borrower_info%FOUND then
+		DBMS_OUTPUT.PUT_LINE(RPAD('Name', 16) || RPAD('Address', 20) || RPAD('Phone No', 12) || RPAD('Loan Date', 10) || RPAD('Return Date', 11) || ' Fine');
+		DBMS_OUTPUT.PUT_LINE('------------------------------------------------------------------------------');
+		DBMS_OUTPUT.PUT_LINE(RPAD(v_name, 16) || RPAD(v_address, 20) || RPAD(v_phone_no, 12) || RPAD(v_loan_date, 10) || RPAD(v_return_date, 11) ||' '|| v_fine);
+	end if;
     -- Fetch and display borrower information
     LOOP
         FETCH c_borrower_info INTO v_phone_no, v_name, v_address, v_loan_date, v_return_date, v_fine;
