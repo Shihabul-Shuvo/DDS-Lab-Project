@@ -1,26 +1,20 @@
 Stationary::
-1. Stationary --> Fragment
+		> Fragment
 		> Trigger
 		> Register User
 		> Show all Customers
 		> Show all Members
 		> Show Available Books
+		> Show Books in Price
 		> Check Book Availability
 		> Add new Book
 		> Update Availability Status
 		> insert members2 procedure
 		> insert members3 procedure
 		> Buy Books
-		
-
-
-
-
-
-
 
 Library::
-1. Library 	> Fragment
+		> Fragment
 		> Trigger
 		> Register User
 		> Show all Readers
@@ -32,3 +26,4 @@ Library::
 		> Update Status And Fine
 		> Show all Borrowers
 		> Update Library Book Status
+		> Return Book
