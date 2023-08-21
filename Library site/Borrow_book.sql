@@ -4,7 +4,7 @@ SET serveroutput on
 CREATE OR REPLACE PACKAGE BorrowFromLibraryPackage AS
 	FUNCTION BorrowBook(
         p_PhoneNo  VARCHAR2,
-        p_BorrowBookName   books.title%type,
+        p_BorrowBookName   books1.title%type,
         p_LoanDate DATE,
         p_ReturnDate DATE
     ) RETURN BOOLEAN;
@@ -16,7 +16,7 @@ CREATE OR REPLACE PACKAGE BODY BorrowFromLibraryPackage AS
 	--Function to implement feature Borrow a Book 
 	FUNCTION BorrowBook(
         p_PhoneNo  VARCHAR2,
-        p_BorrowBookName   books.title%type,
+        p_BorrowBookName   books1.title%type,
         p_LoanDate DATE,
         p_ReturnDate DATE
     ) RETURN BOOLEAN IS
@@ -35,24 +35,17 @@ CREATE OR REPLACE PACKAGE BODY BorrowFromLibraryPackage AS
         FROM Books1
         WHERE Title = p_BorrowBookName;
 		
-        INSERT INTO Borrowers (Borrow_ID, Phone_No, Book_ID, Loan_Date, Return_Date, Fine)
-        VALUES (v_total_borrowed, p_PhoneNo, v_borrow_BookID, p_LoanDate, p_ReturnDate, 0);
-        COMMIT;
-
-        -- Update the Availability_Status_Library for the borrowed book copy
-        UPDATE Book_Copies1
-        SET Availability_Status_Library = (Availability_Status_Library-1)
+		-- Update the Availability_Status_Library for the borrowed book copy
+        UPDATE Book_Copies1 SET Availability_Status_Library = (Availability_Status_Library-1)
         WHERE Book_ID = v_borrow_BookID AND Availability_Status_Library > 0;
-		commit;
+		
+        INSERT INTO Borrowers  VALUES (
+		v_total_borrowed, p_PhoneNo, v_borrow_BookID, p_LoanDate, p_ReturnDate, 0);
 		
         RETURN TRUE;
     EXCEPTION
-        WHEN DUP_VAL_ON_INDEX THEN
-            DBMS_OUTPUT.PUT_LINE('Borrower ID already exists.');
-            ROLLBACK;
-            RETURN FALSE;
         WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE('Book not available for borrowing.');
+            DBMS_OUTPUT.PUT_LINE('Book not available.');
             ROLLBACK;
             RETURN FALSE;
         WHEN OTHERS THEN
@@ -63,29 +56,98 @@ CREATE OR REPLACE PACKAGE BODY BorrowFromLibraryPackage AS
 	
 END BorrowFromLibraryPackage;
 /
+CREATE OR REPLACE FUNCTION ProcessMembership(p_PhoneNo IN VARCHAR2)
+    RETURN NUMBER
+IS
+    v_membership_status Members.Membership_Status%TYPE;
+    v_name Members2.Name%TYPE;
+    v_address Members2.Address%TYPE;
+    v_start_date_lib Members2.Start_Date_Lib%TYPE;
+    v_end_date_lib DATE;
+	v_count number;
+BEGIN
+	v_count := 0;
+    -- Check if the phone number is in Members1 table
+    SELECT COUNT(*) INTO v_count
+    FROM (SELECT Phone_No from Members1 UNION SELECT Phone_No from Members3)
+    WHERE Phone_No = p_PhoneNo;
+
+    IF v_count > 0THEN
+        RETURN 1;
+    END IF;
+
+    -- Check if the phone number is in Members2 table
+	SELECT COUNT(*) INTO v_count
+    FROM Members2
+    WHERE Phone_No = p_PhoneNo;
+	
+    IF v_count > 0 THEN
+		SELECT Name, Address, Start_Date_Lib
+		INTO v_name, v_address, v_start_date_lib
+		FROM Members2
+		WHERE Phone_No = p_PhoneNo;
+        DELETE FROM Members2 WHERE Phone_No = p_PhoneNo;
+
+        v_end_date_lib := ADD_MONTHS(TRUNC(SYSDATE), 1);
+		
+        INSERT INTO Members3 (Phone_No, Name, Address, Membership_Status, Card, Start_Date_Lib, End_Date_Lib)
+        VALUES (p_PhoneNo, v_name, v_address, 'Both', 'Valid', v_start_date_lib, v_end_date_lib);
+        RETURN 2;
+    END IF;
+
+    RETURN 0;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+        RETURN 0;
+    WHEN OTHERS THEN
+        RETURN 0;
+END;
+/
+
 DECLARE
 	--for borrow book
     v_PhoneNo    VARCHAR2(11);
-    v_BorrowBookName   books.title%type;
+    v_BorrowBookName   books1.title%type;
     v_LoanDate   DATE;
     v_ReturnDate DATE;
     v_Borrowed   BOOLEAN;
+	v_days number;
+	v_already_Borrowed number;
+	v_member number;
+	late_fee number;
 BEGIN
 	-- Get user input
     v_PhoneNo := '&Borrower_PhoneNo';
     v_BorrowBookName := '&Book_to_Borrow';
-    v_LoanDate := TO_DATE('&Enter_LoanDate', 'YYYY-MM-DD');
-    v_ReturnDate := TO_DATE('&Enter_ReturnDate', 'YYYY-MM-DD');
+	v_days := &days;
+    v_LoanDate := TRUNC(SYSDATE);
+    v_ReturnDate := TRUNC(SYSDATE + v_days);
+	UpdateFine;
+	
+	select count(*) into v_already_Borrowed from Borrowers where phone_no = v_PhoneNo;
+	if v_already_Borrowed < 1 THEN
+		v_member := ProcessMembership(v_PhoneNo);
 
-    -- Call the BorrowBook function with user input
-    v_Borrowed := BorrowFromLibraryPackage.BorrowBook(v_PhoneNo, v_BorrowBookName, v_LoanDate, v_ReturnDate);
-
-    -- Display the result
-    IF v_Borrowed THEN
-        DBMS_OUTPUT.PUT_LINE('Book borrowed successfully.');
-    ELSE
-        DBMS_OUTPUT.PUT_LINE('Book borrowing failed.');
-    END IF;
+		-- Call the BorrowBook function with user input
+		if v_member = 1 OR v_member = 2  then
+			v_Borrowed := BorrowFromLibraryPackage.BorrowBook(v_PhoneNo, v_BorrowBookName, v_LoanDate, v_ReturnDate);
+		end if;
+		
+		IF v_Borrowed THEN
+			DBMS_OUTPUT.PUT_LINE('Book borrowed successfully.');
+		ELSE
+			DBMS_OUTPUT.PUT_LINE('Not a member.');
+		END IF;
+	ELSE
+		select fine into late_fee from borrowers where phone_no = v_PhoneNo;
+		DBMS_OUTPUT.PUT_LINE('Already borrowed a book. Late fee: ' || late_fee);
+	end if;
+	
+	commit;
+	EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
+        ROLLBACK;
 END;
 /
 

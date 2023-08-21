@@ -18,7 +18,7 @@ CREATE OR REPLACE PACKAGE LibraryPackage AS
     FUNCTION GetAvailableCopies(
         p_BookName VARCHAR2
     ) RETURN NUMBER;
-
+	
     FUNCTION BorrowBook(
         p_BorrowID NUMBER,
         p_PhoneNo  VARCHAR2,
@@ -40,7 +40,7 @@ CREATE OR REPLACE PACKAGE BODY LibraryPackage AS
         VALUES (Books_Seq.NEXTVAL, p_Title, p_Author, p_Price);
         COMMIT;
         DBMS_OUTPUT.PUT_LINE('Book inserted successfully.');
-    END LibraryPackage;
+    END InsertIntoBooks;
 
     PROCEDURE InsertIntoBookCopies(
         p_BookID                 NUMBER,

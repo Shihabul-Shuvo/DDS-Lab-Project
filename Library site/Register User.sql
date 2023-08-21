@@ -34,14 +34,8 @@ BEGIN
 		DELETE FROM Members2@site
         WHERE Phone_No = v_phone_number;
 		
-		INSERT INTO Members3@site VALUES (
-        v_phone_number,
-        f_name,
-        f_address,
-        'Both',
-        v_start_date,
-		v_end_date_lib
-    );
+		INSERT INTO Members3@site VALUES 
+		(v_phone_number, f_name, f_address, 'Both', v_start_date, v_end_date_lib, 'invalid');
     COMMIT;
 	DBMS_OUTPUT.PUT_LINE('Updated status as Both.');
 	
@@ -53,7 +47,8 @@ BEGIN
         v_address,
         v_membership,
         v_start_date_lib,
-		v_end_date_lib
+		v_end_date_lib,
+		'Invalid'
     );
 	
     COMMIT;

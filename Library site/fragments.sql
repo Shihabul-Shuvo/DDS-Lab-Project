@@ -11,9 +11,9 @@ SELECT *
 FROM Members
 WHERE Membership_Status = 'Reader';
 
--- Books1 (PJBook_ID, Title, Author)
+-- Books1 (PJBook_ID, Title, Author, Publication)
 CREATE TABLE Books1 AS
-SELECT Book_ID, Title, Author
+SELECT Book_ID, Title, Author, Publication
 FROM Books;
 
 -- Book_Copies1 (PJCopy_ID, Book_ID, Books_at_library, Availibility_status_library)

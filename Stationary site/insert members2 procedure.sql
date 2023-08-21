@@ -1,3 +1,6 @@
+set serveroutput ON
+set verify OFF
+
 CREATE OR REPLACE PROCEDURE InsertMember2(
     p_phone_no IN Members2.Phone_No%TYPE
 ) AS

@@ -1,6 +1,4 @@
 --Drop tables
-Drop table Purchases;
-Drop table Borrowers;
 Drop table Book_Copies; 
 Drop table Books;
 Drop table Members;
@@ -12,7 +10,8 @@ CREATE TABLE Members (
   Address VARCHAR2(30),
   Membership_Status VARCHAR2(10),
   Start_Date_Lib DATE,
-  End_Date_Lib DATE
+  End_Date_Lib DATE,
+  Card varchar2(7)
 );
 
 -- Create Books table
@@ -20,6 +19,7 @@ CREATE TABLE Books (
   Book_ID NUMBER PRIMARY KEY,
   Title VARCHAR2(50),
   Author VARCHAR2(30),
+  Publication varchar(20),
   Price NUMBER
 );
 
@@ -32,40 +32,34 @@ CREATE TABLE Book_Copies (
   Availability_Status_Shop NUMBER
 );
 
--- Create Borrowers table
-CREATE TABLE Borrowers (
-  Borrow_ID NUMBER PRIMARY KEY,
-  Phone_No VARCHAR2(11) REFERENCES Members(Phone_No),
-  Book_ID NUMBER REFERENCES Books(Book_ID),
-  Loan_Date DATE,
-  Return_Date DATE,
-  fine number
-);
 
--- Create Purchases table
-CREATE TABLE Purchases (
-  Purchase_ID NUMBER PRIMARY KEY,
-  Phone_No VARCHAR2(11),
-  Book_ID NUMBER REFERENCES Books(Book_ID),
-  Purchase_Date DATE
-);
 
-DROP SEQUENCE Purchases_seq;
-CREATE SEQUENCE Purchases_seq START WITH 5 INCREMENT BY 1 NOCACHE NOCYCLE;
 
 --Insert values into Members table
-INSERT INTO Members VALUES ('01801234567', 'Md. Rahman', 'Dhaka', 'Reader', TO_DATE('2023-07-31', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'));
-INSERT INTO Members VALUES ('01787654321', 'Shahnaz Begum', 'Chittagong', 'Customer', TO_DATE('2023-07-30', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'));
-INSERT INTO Members VALUES ('01987654321', 'Abdul Karim', 'Rajshahi', 'Both', TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'));
-INSERT INTO Members VALUES ('01654321098', 'Farhana Akter', 'Khulna', 'Reader', TO_DATE('2023-03-15', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'));
-INSERT INTO Members VALUES ('01543210987', 'Sarwar Hossain', 'Sylhet', 'Customer', TO_DATE('2023-07-15', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'));
+INSERT INTO Members VALUES ('01801234567', 'Md. Rahman', 'Dhaka', 'Reader', TO_DATE('2023-07-31', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Valid');
+INSERT INTO Members VALUES ('01787654321', 'Shahnaz Begum', 'Chittagong', 'Customer', TO_DATE('2023-07-30', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Invalid');
+INSERT INTO Members VALUES ('01987654321', 'Abdul Karim', 'Rajshahi', 'Both', TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Valid');
+INSERT INTO Members VALUES ('01654321098', 'Farhana Akter', 'Khulna', 'Reader', TO_DATE('2023-03-15', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Valid');
+INSERT INTO Members VALUES ('01543210987', 'Sarwar Hossain', 'Sylhet', 'Customer', TO_DATE('2023-07-15', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Valid');
 
 --Insert values into Books table
-INSERT INTO Books VALUES (1, 'To Kill a Mockingbird', 'Harper Lee', 12.99);
-INSERT INTO Books VALUES (2, '1984', 'George Orwell', 9.99);
-INSERT INTO Books VALUES (3, 'The Great Gatsby', 'F. Scott Fitzgerald', 10.49);
-INSERT INTO Books VALUES (4, 'Pride and Prejudice', 'Jane Austen', 8.75);
-INSERT INTO Books VALUES (5, 'To Kill a Kingdom', 'Alexandra Christo', 15.25);
+INSERT INTO Books VALUES (1, 'To Kill a Mockingbird', 'Harper Lee', 'Publisher A', 12.99);
+INSERT INTO Books VALUES (2, '1984', 'George Orwell', 'Publisher B', 9.99);
+INSERT INTO Books VALUES (3, 'The Great Gatsby', 'F. Scott Fitzgerald', 'Publisher C', 10.49);
+INSERT INTO Books VALUES (4, 'Pride and Prejudice', 'Jane Austen', 'Publisher A', 8.75);
+INSERT INTO Books VALUES (5, 'To Kill a Kingdom', 'Alexandra Christo', 'Publisher B', 15.25);
+INSERT INTO Books VALUES (6, 'The Hobbit', 'J.R.R. Tolkien', 'Publisher C', 14.99);
+INSERT INTO Books VALUES (7, 'Harry Potter and the Sorcerer''s Stone', 'J.K. Rowling', 'Publisher A', 11.25);
+INSERT INTO Books VALUES (8, 'The Catcher in the Rye', 'J.D. Salinger', 'Publisher B', 9.75);
+INSERT INTO Books VALUES (9, 'The Alchemist', 'Paulo Coelho', 'Publisher C', 12.99);
+INSERT INTO Books VALUES (10, 'Lord of the Rings', 'J.R.R. Tolkien', 'Publisher A', 18.99);
+-- Bangali Writer Books
+INSERT INTO Books VALUES (11, 'Pather Panchali', 'Bibhutibhushan Bandopadhyay', 'Bangla Publisher', 11.50);
+INSERT INTO Books VALUES (12, 'Feluda Series: Sonar Kella', 'Satyajit Ray', 'Bangla Publisher', 9.25);
+INSERT INTO Books VALUES (13, 'Kabuliwala', 'Rabindranath Tagore', 'Bangla Publisher', 7.99);
+INSERT INTO Books VALUES (14, 'Chokher Bali', 'Rabindranath Tagore', 'Bangla Publisher', 10.75);
+INSERT INTO Books VALUES (15, 'Shesher Kobita', 'Rabindranath Tagore', 'Bangla Publisher', 8.99);
+
 
 --Insert values into Book_Copies table
 INSERT INTO Book_Copies VALUES (1, 1, 5, 6, 5);
@@ -74,26 +68,5 @@ INSERT INTO Book_Copies VALUES (3, 2, 7, 6, 5);
 INSERT INTO Book_Copies VALUES (4, 3, 2, 6, 5);
 INSERT INTO Book_Copies VALUES (5, 4, 4, 6, 5);
 
--- Insert values into Borrowers table
-INSERT INTO Borrowers VALUES (1, '01987654321', 2, TO_DATE('2023-07-31', 'YYYY-MM-DD'), TO_DATE('2023-08-14', 'YYYY-MM-DD'), 0);
-INSERT INTO Borrowers VALUES (2, '01801234567', 4, TO_DATE('2023-07-30', 'YYYY-MM-DD'), TO_DATE('2023-08-13', 'YYYY-MM-DD'), 0);
-INSERT INTO Borrowers VALUES (3, '01543210987', 1, TO_DATE('2023-07-29', 'YYYY-MM-DD'), TO_DATE('2023-08-12', 'YYYY-MM-DD'), 0);
-INSERT INTO Borrowers VALUES (4, '01654321098', 3, TO_DATE('2023-07-28', 'YYYY-MM-DD'), TO_DATE('2023-08-11', 'YYYY-MM-DD'), 0);
-INSERT INTO Borrowers VALUES (5, '01787654321', 5, TO_DATE('2023-07-27', 'YYYY-MM-DD'), TO_DATE('2023-08-10', 'YYYY-MM-DD'), 0);
-
--- Insert values into Purchases table
-INSERT INTO Purchases
-VALUES (1, '01787654321', 1, TO_DATE('2023-07-31', 'YYYY-MM-DD'));
-
-INSERT INTO Purchases
-VALUES (2, '01987654321', 2, TO_DATE('2023-07-30', 'YYYY-MM-DD'));
-
-INSERT INTO Purchases
-VALUES (3, '01987654321', 3, TO_DATE('2023-07-29', 'YYYY-MM-DD'));
-
-INSERT INTO Purchases 
-VALUES (4, '01543210987', 4, TO_DATE('2023-07-28', 'YYYY-MM-DD'));
-
-INSERT INTO Purchases VALUES (Purchases_seq.nextval, '01787654321', 5, TO_DATE('2023-07-27', 'YYYY-MM-DD'));
 
 commit;
