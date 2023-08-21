@@ -10,3 +10,4 @@
 @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\Borrow_book.sql"
 @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\show all borrowers.sql"
 @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\update library book status.sql"
+@"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\return book.sql"

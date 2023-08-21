@@ -1,9 +1,9 @@
 Stationary::
 		> Fragment
 		> Trigger
+		> Show all Members
 		> Register User
 		> Show all Customers
-		> Show all Members
 		> Show Available Books
 		> Show Books in Price
 		> Check Book Availability
