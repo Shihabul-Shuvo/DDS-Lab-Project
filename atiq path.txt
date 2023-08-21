@@ -22,13 +22,13 @@ Stationary::
 Library::
 1. Library 	> Fragment
 		> Trigger
+		> Show all Members
 		> Register User
 		> Show all Readers
-		> Show all Members
 		> Check Membership
 		> Renew Card
 		> Show Book Availability
-		> Borrow Books
 		> Update Status And Fine
+		> Borrow Book
 		> Show all Borrowers
 		> Update Library Book Status
