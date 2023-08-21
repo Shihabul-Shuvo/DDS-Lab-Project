@@ -18,8 +18,10 @@ BEGIN
     -- Display the fine value and book details
     IF v_fine IS NOT NULL THEN
         DBMS_OUTPUT.PUT_LINE('Fine for the borrowed book: ' || v_fine);
+		delete * from borrowers where Phone_No = v_phone_no;
     ELSE
         DBMS_OUTPUT.PUT_LINE('No fine for the borrowed book.');
+		delete * from borrowers where Phone_No = v_phone_no;
     END IF;
 
     -- Optionally, you can retrieve and display more information about the book using v_book_id
