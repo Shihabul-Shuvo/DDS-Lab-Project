@@ -56,6 +56,39 @@ CREATE SEQUENCE Purchases_seq START WITH 5 INCREMENT BY 1 NOCACHE NOCYCLE;
 DROP SEQUENCE book_id_seq;
 CREATE SEQUENCE book_id_seq START WITH 15 INCREMENT BY 1 NOCACHE NOCYCLE;
 
+--Insert values into Members table
+INSERT INTO Members VALUES ('01801234567', 'Md. Rahman', 'Dhaka', 'Reader', TO_DATE('2023-07-31', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Valid');
+INSERT INTO Members VALUES ('01787654321', 'Shahnaz Begum', 'Chittagong', 'Customer', TO_DATE('2023-07-30', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Invalid');
+INSERT INTO Members VALUES ('01987654321', 'Abdul Karim', 'Rajshahi', 'Both', TO_DATE('2023-01-01', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Valid');
+INSERT INTO Members VALUES ('01654321098', 'Farhana Akter', 'Khulna', 'Reader', TO_DATE('2023-03-15', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Valid');
+INSERT INTO Members VALUES ('01543210987', 'Sarwar Hossain', 'Sylhet', 'Customer', TO_DATE('2023-07-15', 'YYYY-MM-DD'), TO_DATE('2023-12-31', 'YYYY-MM-DD'), 'Valid');
+
+--Insert values into Books table
+INSERT INTO Books VALUES (1, 'To Kill a Mockingbird', 'Harper Lee', 'Publisher A', 12.99);
+INSERT INTO Books VALUES (2, '1984', 'George Orwell', 'Publisher B', 9.99);
+INSERT INTO Books VALUES (3, 'The Great Gatsby', 'F. Scott Fitzgerald', 'Publisher C', 10.49);
+INSERT INTO Books VALUES (4, 'Pride and Prejudice', 'Jane Austen', 'Publisher A', 8.75);
+INSERT INTO Books VALUES (5, 'To Kill a Kingdom', 'Alexandra Christo', 'Publisher B', 15.25);
+INSERT INTO Books VALUES (6, 'The Hobbit', 'J.R.R. Tolkien', 'Publisher C', 14.99);
+INSERT INTO Books VALUES (7, 'Harry Potter and the Sorcerer''s Stone', 'J.K. Rowling', 'Publisher A', 11.25);
+INSERT INTO Books VALUES (8, 'The Catcher in the Rye', 'J.D. Salinger', 'Publisher B', 9.75);
+INSERT INTO Books VALUES (9, 'The Alchemist', 'Paulo Coelho', 'Publisher C', 12.99);
+INSERT INTO Books VALUES (10, 'Lord of the Rings', 'J.R.R. Tolkien', 'Publisher A', 18.99);
+-- Bangali Writer Books
+INSERT INTO Books VALUES (11, 'Pather Panchali', 'Bibhutibhushan Bandopadhyay', 'Bangla Publisher', 11.50);
+INSERT INTO Books VALUES (12, 'Feluda Series: Sonar Kella', 'Satyajit Ray', 'Bangla Publisher', 9.25);
+INSERT INTO Books VALUES (13, 'Kabuliwala', 'Rabindranath Tagore', 'Bangla Publisher', 7.99);
+INSERT INTO Books VALUES (14, 'Chokher Bali', 'Rabindranath Tagore', 'Bangla Publisher', 10.75);
+INSERT INTO Books VALUES (15, 'Shesher Kobita', 'Rabindranath Tagore', 'Bangla Publisher', 8.99);
+
+
+--Insert values into Book_Copies table
+INSERT INTO Book_Copies VALUES (1, 1, 5, 6, 5);
+INSERT INTO Book_Copies VALUES (2, 5, 3, 6, 5);
+INSERT INTO Book_Copies VALUES (3, 2, 7, 6, 5);
+INSERT INTO Book_Copies VALUES (4, 3, 2, 6, 5);
+INSERT INTO Book_Copies VALUES (5, 4, 4, 6, 5);
+
 -- Insert values into Borrowers table
 INSERT INTO Borrowers VALUES (1, '01987654321', 2, TO_DATE('2023-07-31', 'YYYY-MM-DD'), TO_DATE('2023-08-14', 'YYYY-MM-DD'), 0);
 INSERT INTO Borrowers VALUES (2, '01801234567', 4, TO_DATE('2023-07-30', 'YYYY-MM-DD'), TO_DATE('2023-08-13', 'YYYY-MM-DD'), 0);
@@ -70,6 +103,7 @@ INSERT INTO Purchases VALUES (Purchases_seq.nextval, '01787654321', 5, TO_DATE('
 
 -- Droping table before creating
 Drop table members1;
+Drop table members3;
 Drop table books1;
 Drop table Book_Copies1;
 
@@ -96,6 +130,8 @@ FROM Books;
 CREATE TABLE Book_Copies1 AS
 SELECT Copy_ID, Book_ID, Books_At_Library, Availability_Status_Library
 FROM Book_Copies;
+
+COMMIT;
 
 -- Display the counts of the new tables
 DECLARE
