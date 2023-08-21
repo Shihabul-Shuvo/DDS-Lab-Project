@@ -1,28 +1,164 @@
 set verify off
 set serveroutput ON
 
-CREATE OR REPLACE TRIGGER Before_Delete_Borrower
-BEFORE DELETE ON Borrowers
+-- Trigger after inserting into Borrowers table
+CREATE OR REPLACE TRIGGER after_insert_borrowers
+AFTER INSERT ON Borrowers
 FOR EACH ROW
-DECLARE
-    v_book_id Books1.Book_ID%TYPE;
 BEGIN
-    -- Get the Book_ID of the book being deleted
-    SELECT Book_ID INTO v_book_id
-    FROM Borrowers
-    WHERE Borrow_ID = :OLD.Borrow_ID;
+    DBMS_OUTPUT.PUT_LINE('A new record was inserted into Borrowers table.');
+END;
+/
 
-    -- Increment Availability_Status_Library by 1 for the book in Book_Copies1
-    UPDATE Book_Copies1
-    SET Availability_Status_Library = Availability_Status_Library + 1
-    WHERE Book_ID = v_book_id;
+-- Trigger after updating Borrowers table
+CREATE OR REPLACE TRIGGER after_update_borrowers
+AFTER UPDATE ON Borrowers
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was updated in Borrowers table.');
+END;
+/
 
-    -- Display message
-    DBMS_OUTPUT.PUT_LINE('Availability status updated for book with Book_ID: ' || v_book_id);
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        DBMS_OUTPUT.PUT_LINE('Book not found.');
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('Error occurred: ' || SQLERRM);
+-- Trigger after deleting from Borrowers table
+CREATE OR REPLACE TRIGGER after_delete_borrowers
+AFTER DELETE ON Borrowers
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was deleted from Borrowers table.');
+END;
+/
+
+-- Trigger after inserting into Purchases table
+CREATE OR REPLACE TRIGGER after_insert_purchases
+AFTER INSERT ON Purchases
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A new record was inserted into Purchases table.');
+END;
+/
+
+-- Trigger after updating Purchases table
+CREATE OR REPLACE TRIGGER after_update_purchases
+AFTER UPDATE ON Purchases
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was updated in Purchases table.');
+END;
+/
+
+-- Trigger after deleting from Purchases table
+CREATE OR REPLACE TRIGGER after_delete_purchases
+AFTER DELETE ON Purchases
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was deleted from Purchases table.');
+END;
+/
+
+-- Trigger after inserting into Members1 table
+CREATE OR REPLACE TRIGGER after_insert_members1
+AFTER INSERT ON Members1
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A new record was inserted into Members1 table.');
+END;
+/
+
+-- Trigger after updating Members1 table
+CREATE OR REPLACE TRIGGER after_update_members1
+AFTER UPDATE ON Members1
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was updated in Members1 table.');
+END;
+/
+
+-- Trigger after deleting from Members1 table
+CREATE OR REPLACE TRIGGER after_delete_members1
+AFTER DELETE ON Members1
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was deleted from Members1 table.');
+END;
+/
+
+-- Trigger after inserting into Members3 table
+CREATE OR REPLACE TRIGGER after_insert_members3
+AFTER INSERT ON Members3
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A new record was inserted into Members3 table.');
+END;
+/
+
+-- Trigger after updating Members3 table
+CREATE OR REPLACE TRIGGER after_update_members3
+AFTER UPDATE ON Members3
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was updated in Members3 table.');
+END;
+/
+
+-- Trigger after deleting from Members3 table
+CREATE OR REPLACE TRIGGER after_delete_members3
+AFTER DELETE ON Members3
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was deleted from Members3 table.');
+END;
+/
+
+-- Trigger after inserting into Books1 table
+CREATE OR REPLACE TRIGGER after_insert_books1
+AFTER INSERT ON Books1
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A new record was inserted into Books1 table.');
+END;
+/
+
+-- Trigger after updating Books1 table
+CREATE OR REPLACE TRIGGER after_update_books1
+AFTER UPDATE ON Books1
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was updated in Books1 table.');
+END;
+/
+
+-- Trigger after deleting from Books1 table
+CREATE OR REPLACE TRIGGER after_delete_books1
+AFTER DELETE ON Books1
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was deleted from Books1 table.');
+END;
+/
+
+-- Trigger after inserting into Book_Copies1 table
+CREATE OR REPLACE TRIGGER after_insert_book_copies1
+AFTER INSERT ON Book_Copies1
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A new record was inserted into Book_Copies1 table.');
+END;
+/
+
+-- Trigger after updating Book_Copies1 table
+CREATE OR REPLACE TRIGGER after_update_book_copies1
+AFTER UPDATE ON Book_Copies1
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was updated in Book_Copies1 table.');
+END;
+/
+
+-- Trigger after deleting from Book_Copies1 table
+CREATE OR REPLACE TRIGGER after_delete_book_copies1
+AFTER DELETE ON Book_Copies1
+FOR EACH ROW
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('A record was deleted from Book_Copies1 table.');
 END;
 /

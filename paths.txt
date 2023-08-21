@@ -43,11 +43,12 @@ test.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\test.sql"
 trigger.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\trigger.sql"
 Register user.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\Register User.sql"
 
-Update fine: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\update fine.sql"
+Update fine: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\update status and fine.sql"
 show borrowers info: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\show all borrowers.sql"
 show book availability: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\show book availability.sql"
 Borrow_book.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\Borrow_book.sql"
 check membership: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\check membership.sql"
 return book.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\return book.sql"
+renew card.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\renew card.sql"
 
 

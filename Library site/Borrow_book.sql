@@ -110,6 +110,7 @@ DECLARE
     v_BorrowBookName   books1.title%type;
     v_LoanDate   DATE;
     v_ReturnDate DATE;
+	v_card_status VARCHAR2(7);
     v_Borrowed   BOOLEAN;
 	v_days number;
 	v_already_Borrowed number;
@@ -123,9 +124,13 @@ BEGIN
     v_LoanDate := TRUNC(SYSDATE);
     v_ReturnDate := TRUNC(SYSDATE + v_days);
 	UpdateFine;
+	UpdateCardStatus;
 	
 	select count(*) into v_already_Borrowed from Borrowers where phone_no = v_PhoneNo;
-	if v_already_Borrowed < 1 THEN
+	
+	SELECT Card INTO v_card_status FROM ( SELECT Card FROM Members1 WHERE Phone_No = v_PhoneNo 
+	UNION ALL SELECT Card FROM Members3 WHERE Phone_No = v_PhoneNo );
+	if v_already_Borrowed < 1 AND v_card_status = 'Valid'THEN
 		v_member := ProcessMembership(v_PhoneNo);
 
 		-- Call the BorrowBook function with user input
@@ -140,7 +145,7 @@ BEGIN
 		END IF;
 	ELSE
 		select fine into late_fee from borrowers where phone_no = v_PhoneNo;
-		DBMS_OUTPUT.PUT_LINE('Already borrowed a book. Late fee: ' || late_fee);
+		DBMS_OUTPUT.PUT_LINE('Already borrowed a book or membership card expired. Late fee: ' || late_fee);
 	end if;
 	
 	commit;
