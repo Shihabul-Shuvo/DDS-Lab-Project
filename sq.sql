@@ -1,5 +1,1 @@
-@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\CkeckPoint\create_table.sql"
-@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\fragments.sql"
-@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\Register User.sql"
-@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\Check Book Availability.sql"
-@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\test 1.sql"
+@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\fragments.sql"

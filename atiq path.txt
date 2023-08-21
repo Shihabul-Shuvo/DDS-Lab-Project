@@ -1,2 +1,13 @@
-1. Stationary Fragment
-2. 
+Stationary::
+1. Stationary --> Fragment
+		> Trigger
+		> Register User
+
+
+
+
+
+
+Library::
+1. Library 	--> Fragment
+		--> Trigger

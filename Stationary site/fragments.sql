@@ -2,6 +2,7 @@
 Drop table Book_Copies; 
 Drop table Books;
 Drop table Members;
+Drop table Purchases;
 
 -- Create Members table
 CREATE TABLE Members (
@@ -30,16 +31,6 @@ CREATE TABLE Book_Copies (
   Books_At_Library NUMBER,
   Availability_Status_Library NUMBER,
   Availability_Status_Shop NUMBER
-);
-
--- Create Borrowers table
-CREATE TABLE Borrowers (
-  Borrow_ID NUMBER PRIMARY KEY,
-  Phone_No VARCHAR2(11),
-  Book_ID NUMBER,
-  Loan_Date DATE,
-  Return_Date DATE,
-  fine number
 );
 
 -- Create Purchases table
@@ -90,9 +81,9 @@ INSERT INTO Book_Copies VALUES (4, 3, 2, 6, 5);
 INSERT INTO Book_Copies VALUES (5, 4, 4, 6, 5);
 
 -- Insert values into Borrowers table
-INSERT INTO Borrowers VALUES (1, '01987654321', 2, TO_DATE('2023-07-31', 'YYYY-MM-DD'), TO_DATE('2023-08-14', 'YYYY-MM-DD'), 0);
-INSERT INTO Borrowers VALUES (2, '01801234567', 4, TO_DATE('2023-07-30', 'YYYY-MM-DD'), TO_DATE('2023-08-13', 'YYYY-MM-DD'), 0);
-INSERT INTO Borrowers VALUES (3, '01654321098', 3, TO_DATE('2023-07-28', 'YYYY-MM-DD'), TO_DATE('2023-08-11', 'YYYY-MM-DD'), 0);
+--INSERT INTO Borrowers VALUES (1, '01987654321', 2, TO_DATE('2023-07-31', 'YYYY-MM-DD'), TO_DATE('2023-08-14', 'YYYY-MM-DD'), 0);
+--INSERT INTO Borrowers VALUES (2, '01801234567', 4, TO_DATE('2023-07-30', 'YYYY-MM-DD'), TO_DATE('2023-08-13', 'YYYY-MM-DD'), 0);
+--INSERT INTO Borrowers VALUES (3, '01654321098', 3, TO_DATE('2023-07-28', 'YYYY-MM-DD'), TO_DATE('2023-08-11', 'YYYY-MM-DD'), 0);
 
 -- Insert values into Purchases table
 INSERT INTO Purchases VALUES (1, '01787654321', 1, TO_DATE('2023-07-31', 'YYYY-MM-DD'));
