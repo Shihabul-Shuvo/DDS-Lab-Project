@@ -2,6 +2,8 @@
 Drop table Book_Copies; 
 Drop table Books;
 Drop table Members;
+Drop table Borrowers;
+Drop table Purchases;
 
 -- Create Members table
 CREATE TABLE Members (
@@ -42,16 +44,8 @@ CREATE TABLE Borrowers (
   fine number
 );
 
--- Create Purchases table
-CREATE TABLE Purchases (
-  Purchase_ID NUMBER PRIMARY KEY,
-  Phone_No VARCHAR2(11),
-  Book_ID NUMBER,
-  Purchase_Date DATE
-);
-
-DROP SEQUENCE Purchases_seq;
-CREATE SEQUENCE Purchases_seq START WITH 5 INCREMENT BY 1 NOCACHE NOCYCLE;
+--DROP SEQUENCE Purchases_seq;
+--CREATE SEQUENCE Purchases_seq START WITH 5 INCREMENT BY 1 NOCACHE NOCYCLE;
 
 DROP SEQUENCE book_id_seq;
 CREATE SEQUENCE book_id_seq START WITH 15 INCREMENT BY 1 NOCACHE NOCYCLE;
@@ -95,15 +89,14 @@ INSERT INTO Borrowers VALUES (2, '01801234567', 4, TO_DATE('2023-07-30', 'YYYY-M
 INSERT INTO Borrowers VALUES (3, '01654321098', 3, TO_DATE('2023-07-28', 'YYYY-MM-DD'), TO_DATE('2023-08-11', 'YYYY-MM-DD'), 0);
 
 -- Insert values into Purchases table
-INSERT INTO Purchases VALUES (1, '01787654321', 1, TO_DATE('2023-07-31', 'YYYY-MM-DD'));
-INSERT INTO Purchases VALUES (2, '01987654321', 2, TO_DATE('2023-07-30', 'YYYY-MM-DD'));
-INSERT INTO Purchases VALUES (3, '01987654321', 3, TO_DATE('2023-07-29', 'YYYY-MM-DD'));
-INSERT INTO Purchases VALUES (4, '01543210987', 4, TO_DATE('2023-07-28', 'YYYY-MM-DD'));
-INSERT INTO Purchases VALUES (Purchases_seq.nextval, '01787654321', 5, TO_DATE('2023-07-27', 'YYYY-MM-DD'));
+--INSERT INTO Purchases VALUES (1, '01787654321', 1, TO_DATE('2023-07-31', 'YYYY-MM-DD'));
+--INSERT INTO Purchases VALUES (2, '01987654321', 2, TO_DATE('2023-07-30', 'YYYY-MM-DD'));
+--INSERT INTO Purchases VALUES (3, '01987654321', 3, TO_DATE('2023-07-29', 'YYYY-MM-DD'));
+--INSERT INTO Purchases VALUES (4, '01543210987', 4, TO_DATE('2023-07-28', 'YYYY-MM-DD'));
+--INSERT INTO Purchases VALUES (Purchases_seq.nextval, '01787654321', 5, TO_DATE('2023-07-27', 'YYYY-MM-DD'));
 
 -- Droping table before creating
 Drop table members1;
-Drop table members3;
 Drop table books1;
 Drop table Book_Copies1;
 
@@ -114,12 +107,6 @@ CREATE TABLE Members1 AS
 SELECT *
 FROM Members
 WHERE Membership_Status = 'Reader';
-
--- Members3 (SLstatus = 'both')
-CREATE TABLE Members3 AS
-SELECT *
-FROM Members
-WHERE Membership_Status = 'Both';
 
 -- Books1 (PJBook_ID, Title, Author, Publication)
 CREATE TABLE Books1 AS
@@ -136,17 +123,14 @@ COMMIT;
 -- Display the counts of the new tables
 DECLARE
     v_count1 NUMBER;
-    v_count2 NUMBER;
-	v_count3 NUMBER;
+    v_count3 NUMBER;
 	v_count4 NUMBER;
 BEGIN
     SELECT COUNT(*) INTO v_count1 FROM Members1;
-    SELECT COUNT(*) INTO v_count2 FROM Members3;
 	SELECT COUNT(*) INTO v_count3 FROM Books1;
     SELECT COUNT(*) INTO v_count4 FROM Book_Copies1;
     
     DBMS_OUTPUT.PUT_LINE('Members1 count: ' || v_count1);
-    DBMS_OUTPUT.PUT_LINE('Members3 count: ' || v_count2);
 	DBMS_OUTPUT.PUT_LINE('Books1 count: ' || v_count3);
     DBMS_OUTPUT.PUT_LINE('Book_Copies1 count: ' || v_count4);
 END;

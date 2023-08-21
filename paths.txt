@@ -38,8 +38,7 @@ update book availability status operation:
 update availability status.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stationary site\update availability status.sql"
 
 --------Library site-----------
-test.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\test.sql"
-
+feagment.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\fragments.sql"
 trigger.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\trigger.sql"
 Register user.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\Register User.sql"
 
