@@ -39,7 +39,7 @@ BEGIN
         WHERE Phone_No = v_phone_number;
 		
 		INSERT INTO Members3@site VALUES 
-		(v_phone_number, f_name, f_address, 'Both', v_start_date, v_end_date_lib, 'invalid');
+		(v_phone_number, f_name, f_address, 'Both', v_start_date, v_end_date_lib, 'Valid');
 	DBMS_OUTPUT.PUT_LINE('Updated status as Both.');
 	
 	ELSIF v_member_count1 < 1 AND v_member_count2 < 1 THEN
@@ -51,7 +51,7 @@ BEGIN
         v_membership,
         v_start_date_lib,
 		v_end_date_lib,
-		'Invalid'
+		'Valid'
     );
 	ELSE
 		DBMS_OUTPUT.PUT_LINE('Phone number already registered.');

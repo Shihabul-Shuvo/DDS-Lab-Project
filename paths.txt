@@ -40,14 +40,20 @@ update availability status.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Stati
 --------Library site-----------
 feagment.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\fragments.sql"
 trigger.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\trigger.sql"
+
+show all readers.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\show all readers.sql"
+show all members: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\show all members.sql"
+
 Register user.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\Register User.sql"
 
 Update fine: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\update status and fine.sql"
 show borrowers info: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\show all borrowers.sql"
 show book availability: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\show book availability.sql"
 Borrow_book.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\Borrow_book.sql"
+
 check membership: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\check membership.sql"
 return book.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\return book.sql"
 renew card.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\renew card.sql"
+update library book status.sql: @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\update library book status.sql"
 
 

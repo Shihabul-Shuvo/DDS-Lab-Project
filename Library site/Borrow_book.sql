@@ -60,16 +60,16 @@ CREATE OR REPLACE FUNCTION ProcessMembership(p_PhoneNo IN VARCHAR2)
     RETURN NUMBER
 IS
     v_membership_status Members.Membership_Status%TYPE;
-    v_name Members2.Name%TYPE;
-    v_address Members2.Address%TYPE;
-    v_start_date_lib Members2.Start_Date_Lib%TYPE;
+    v_name Members1.Name%TYPE;
+    v_address Members1.Address%TYPE;
+    v_start_date_lib Members1.Start_Date_Lib%TYPE;
     v_end_date_lib DATE;
 	v_count number;
 BEGIN
 	v_count := 0;
     -- Check if the phone number is in Members1 table
     SELECT COUNT(*) INTO v_count
-    FROM (SELECT Phone_No from Members1 UNION SELECT Phone_No from Members3)
+    FROM (SELECT Phone_No from Members1 UNION SELECT Phone_No from Members3@site)
     WHERE Phone_No = p_PhoneNo;
 
     IF v_count > 0THEN
@@ -78,19 +78,19 @@ BEGIN
 
     -- Check if the phone number is in Members2 table
 	SELECT COUNT(*) INTO v_count
-    FROM Members2
+    FROM Members2@site
     WHERE Phone_No = p_PhoneNo;
 	
     IF v_count > 0 THEN
 		SELECT Name, Address, Start_Date_Lib
 		INTO v_name, v_address, v_start_date_lib
-		FROM Members2
+		FROM Members2@site
 		WHERE Phone_No = p_PhoneNo;
-        DELETE FROM Members2 WHERE Phone_No = p_PhoneNo;
+        DELETE FROM Members2@site WHERE Phone_No = p_PhoneNo;
 
         v_end_date_lib := ADD_MONTHS(TRUNC(SYSDATE), 1);
 		
-        INSERT INTO Members3 (Phone_No, Name, Address, Membership_Status, Card, Start_Date_Lib, End_Date_Lib)
+        INSERT INTO Members3@site (Phone_No, Name, Address, Membership_Status, Card, Start_Date_Lib, End_Date_Lib)
         VALUES (p_PhoneNo, v_name, v_address, 'Both', 'Valid', v_start_date_lib, v_end_date_lib);
         RETURN 2;
     END IF;
@@ -128,21 +128,28 @@ BEGIN
 	
 	select count(*) into v_already_Borrowed from Borrowers where phone_no = v_PhoneNo;
 	
-	SELECT Card INTO v_card_status FROM ( SELECT Card FROM Members1 WHERE Phone_No = v_PhoneNo 
-	UNION ALL SELECT Card FROM Members3 WHERE Phone_No = v_PhoneNo );
-	if v_already_Borrowed < 1 AND v_card_status = 'Valid'THEN
-		v_member := ProcessMembership(v_PhoneNo);
-
-		-- Call the BorrowBook function with user input
-		if v_member = 1 OR v_member = 2  then
-			v_Borrowed := BorrowFromLibraryPackage.BorrowBook(v_PhoneNo, v_BorrowBookName, v_LoanDate, v_ReturnDate);
-		end if;
+	if v_already_Borrowed < 1 THEN
+	
+		SELECT Card INTO v_card_status FROM ( SELECT Card FROM Members1 WHERE Phone_No = v_PhoneNo 
+		UNION ALL SELECT Card FROM Members3@site WHERE Phone_No = v_PhoneNo );
 		
-		IF v_Borrowed THEN
-			DBMS_OUTPUT.PUT_LINE('Book borrowed successfully.');
+		if v_card_status = 'Valid' THEN
+			v_member := ProcessMembership(v_PhoneNo);
+
+			-- Call the BorrowBook function with user input
+			if v_member = 1 OR v_member = 2  then
+				v_Borrowed := BorrowFromLibraryPackage.BorrowBook(v_PhoneNo, v_BorrowBookName, v_LoanDate, v_ReturnDate);
+			end if;
+		
+			IF v_Borrowed THEN
+				DBMS_OUTPUT.PUT_LINE('Book borrowed successfully.');
+			ELSE
+				DBMS_OUTPUT.PUT_LINE('Not a member.');
+			END IF;
 		ELSE
-			DBMS_OUTPUT.PUT_LINE('Not a member.');
-		END IF;
+			DBMS_OUTPUT.PUT_LINE('Not a valid member.');
+			
+		end if;
 	ELSE
 		select fine into late_fee from borrowers where phone_no = v_PhoneNo;
 		DBMS_OUTPUT.PUT_LINE('Already borrowed a book or membership card expired. Late fee: ' || late_fee);
