@@ -12,10 +12,10 @@ BEGIN
 	
     SELECT name, address, start_date_lib, end_date_lib 
 	INTO v_name, v_address, v_start_date, v_end_date 
-	from MEMBERS1
+	from MEMBERS1@site
 	where Phone_No = p_phone_no;
 		
-	DELETE FROM Members1
+	DELETE FROM Members1@site
     WHERE Phone_No = p_phone_no;
 		
 	INSERT INTO Members3 VALUES (
@@ -24,7 +24,8 @@ BEGIN
         v_address,
         'Both',
         v_start_date,
-		v_end_date
+		v_end_date,
+		'Invalid'
     );
     COMMIT;
 	DBMS_OUTPUT.PUT_LINE('Updated status as Both.');

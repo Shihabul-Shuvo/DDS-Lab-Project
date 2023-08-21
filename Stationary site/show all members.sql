@@ -3,7 +3,7 @@ SET SERVEROUTPUT ON;
 DECLARE
     CURSOR MembersCursor IS
         SELECT Name, Phone_No
-        FROM Members1
+        FROM Members1@site
         UNION ALL
         SELECT Name, Phone_No
         FROM Members2
@@ -11,8 +11,8 @@ DECLARE
         SELECT Name, Phone_No
         FROM Members3;
     
-    v_member_name Members1.Name%TYPE;
-    v_member_phone Members1.Phone_No%TYPE;
+    v_member_name Members2.Name%TYPE;
+    v_member_phone Members2.Phone_No%TYPE;
 BEGIN
 	-- Retrieve and display members names and phone numbers
 	DBMS_OUTPUT.PUT_LINE('ALl members name with their name and phone no: ');

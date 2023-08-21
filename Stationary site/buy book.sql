@@ -48,7 +48,7 @@ BEGIN
 			
 			-- Check if the phone_no exists in Members1 table
 			SELECT COUNT(*) INTO v_count1
-			FROM Members1
+			FROM Members1@site
 			WHERE Phone_no = v_phone_no;
 			
 			-- Check if the phone_no exists in Members2 table

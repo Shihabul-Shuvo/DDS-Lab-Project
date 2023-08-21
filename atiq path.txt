@@ -2,6 +2,17 @@ Stationary::
 1. Stationary --> Fragment
 		> Trigger
 		> Register User
+		> Show all Customers
+		> Show all Members
+		> Show Available Books
+		> Check Book Availability
+		> Add new Book
+		> Update Availability Status
+		> insert members2 procedure
+		> insert members3 procedure
+		> Buy Books
+		
+
 
 
 
@@ -9,5 +20,15 @@ Stationary::
 
 
 Library::
-1. Library 	--> Fragment
-		--> Trigger
+1. Library 	> Fragment
+		> Trigger
+		> Register User
+		> Show all Readers
+		> Show all Members
+		> Check Membership
+		> Renew Card
+		> Show Book Availability
+		> Borrow Books
+		> Update Status And Fine
+		> Show all Borrowers
+		> Update Library Book Status

@@ -3,13 +3,13 @@ SET SERVEROUTPUT ON;
 DECLARE
     CURSOR AvailableBooksCursor IS
         SELECT B1.Title, B1.Author, B2.Price
-        FROM Books1 B1
+        FROM Books1@site B1
         JOIN Book_Copies2 BC2 ON B1.Book_ID = BC2.Book_ID
         JOIN Books2 B2 ON BC2.Book_ID = B2.Book_ID
         WHERE BC2.Availability_Status_Shop > 0;
     
-    v_title Books1.Title%TYPE;
-    v_author Books1.Author%TYPE;
+    v_title VARCHAR2(25);
+    v_author VARCHAR2(25);
     v_price Books2.Price%TYPE;
 BEGIN
     OPEN AvailableBooksCursor;

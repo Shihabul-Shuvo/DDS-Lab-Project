@@ -1,0 +1,8 @@
+@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\fragments.sql"
+@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\trigger.sql"
+@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\Register User.sql"
+@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\show all customers.sql"
+@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\show all members.sql"
+@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\Check Book Availability.sql"
+@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\add new book.sql"
+@"F:\CSE\4.1\CSE 4126 DDSL\BookVault Project\DDS-Lab-Project\Stationary site\update availability status.sql"

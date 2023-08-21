@@ -1,33 +1,6 @@
 set verify off
 set serveroutput ON
 
--- Trigger after inserting into Borrowers table
-CREATE OR REPLACE TRIGGER after_insert_borrowers
-AFTER INSERT ON Borrowers
-FOR EACH ROW
-BEGIN
-    DBMS_OUTPUT.PUT_LINE('A new record was inserted into Borrowers table.');
-END;
-/
-
--- Trigger after updating Borrowers table
-CREATE OR REPLACE TRIGGER after_update_borrowers
-AFTER UPDATE ON Borrowers
-FOR EACH ROW
-BEGIN
-    DBMS_OUTPUT.PUT_LINE('A record was updated in Borrowers table.');
-END;
-/
-
--- Trigger after deleting from Borrowers table
-CREATE OR REPLACE TRIGGER after_delete_borrowers
-AFTER DELETE ON Borrowers
-FOR EACH ROW
-BEGIN
-    DBMS_OUTPUT.PUT_LINE('A record was deleted from Borrowers table.');
-END;
-/
-
 -- Trigger after inserting into Purchases table
 CREATE OR REPLACE TRIGGER after_insert_purchases
 AFTER INSERT ON Purchases
