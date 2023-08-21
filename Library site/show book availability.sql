@@ -1,16 +1,13 @@
 DECLARE
     CURSOR c_latest_return_date IS
         SELECT 
-            BC2.Book_ID,
-            B.Title,
-            B.Author,
-            B.Publication,
+            BC2.Book_ID,B.Title,B.Author,B.Publication,
             MIN(Return_Date) AS Latest_Return_Date,
             SUM(CASE WHEN Availability_Status_Shop > 0 THEN 1 ELSE 0 END) AS Availability_Status
-        FROM Book_Copies2 BC2
-        JOIN Books1 B ON BC2.Book_ID = B.Book_ID
-        LEFT JOIN Borrowers BR ON BC2.Book_ID = BR.Book_ID
-        GROUP BY BC2.Book_ID, B.Title, B.Author, B.Publication;
+			FROM Book_Copies2@site BC2
+			JOIN Books1 B ON BC2.Book_ID = B.Book_ID
+			LEFT JOIN Borrowers BR ON BC2.Book_ID = BR.Book_ID
+			GROUP BY BC2.Book_ID, B.Title, B.Author, B.Publication;
 
     v_book_id Books1.Book_ID%TYPE;
     v_title Books1.Title%TYPE;

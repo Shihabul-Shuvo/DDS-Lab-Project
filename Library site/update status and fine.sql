@@ -22,7 +22,7 @@ BEGIN
     WHERE end_date_lib < TRUNC(SYSDATE);
     
     -- Update card status for members in Members3 table
-    UPDATE Members3
+    UPDATE Members3@site
     SET Card = 'Invalid'
     WHERE end_date_lib < TRUNC(SYSDATE);
     

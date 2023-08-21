@@ -6,7 +6,7 @@ BEGIN
 	v_count := 0;
     -- Check if the phone number is in Members1 table
     SELECT COUNT(*) INTO v_count
-    FROM (SELECT Phone_No from Members1 UNION SELECT Phone_No from Members3)
+    FROM (SELECT Phone_No from Members1 UNION SELECT Phone_No from Members3@site)
     WHERE Phone_No = p_PhoneNo;
 
     IF v_count > 0THEN
@@ -15,7 +15,7 @@ BEGIN
 
     -- Check if the phone number is in Members2 table
 	SELECT COUNT(*) INTO v_count
-    FROM Members2
+    FROM Members2@site
     WHERE Phone_No = p_PhoneNo;
 	
     IF v_count > 0 THEN

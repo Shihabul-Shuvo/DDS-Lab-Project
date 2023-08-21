@@ -9,7 +9,7 @@ DECLARE
             FROM Members1
             UNION
             SELECT Phone_No, Name, Address
-            FROM Members3
+            FROM Members3@site
         ) M ON B.Phone_No = M.Phone_No;
     
     -- Variables to hold cursor data
@@ -21,6 +21,7 @@ DECLARE
     v_fine Borrowers.fine%TYPE;
 BEGIN
 	UpdateFine;
+	UpdateCardStatus;
     -- Open the cursor
     OPEN c_borrower_info;
 	FETCH c_borrower_info INTO v_phone_no, v_name, v_address, v_loan_date, v_return_date, v_fine;
