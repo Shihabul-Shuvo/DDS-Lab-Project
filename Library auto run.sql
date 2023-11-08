@@ -1,5 +1,13 @@
 set serveroutput on
+BEGIN
+	dbms_output.put_line('Running...... fragments.sql');
+end;
+/
 @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\fragments.sql"
+BEGIN
+	dbms_output.put_line('Running...... trigger.sql');
+end;
+/
 @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\trigger.sql"
 BEGIN
 	dbms_output.put_line('Running...... show all members.sql');
@@ -26,6 +34,10 @@ BEGIN
 end;
 /
 @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\renew card.sql"
+BEGIN
+	dbms_output.put_line('Running...... show book availability.sql');
+end;
+/
 @"D:\Shihabul-Shuvo Github\DDS-Lab-Project\Library site\show book availability.sql"
 BEGIN
 	dbms_output.put_line('Running...... update status and fine.sql');
